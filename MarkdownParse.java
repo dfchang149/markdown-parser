@@ -12,10 +12,31 @@ public class MarkdownParse {
         // find the next [, then find the ], then find the (, then read link upto next )
         int currentIndex = 0;
         while(currentIndex < markdown.length()) {
+            int openQuotes = markdown.indexOf('"',currentIndex);
+            int closeQuotes = markdown.indexOf('"',openQuotes+1);
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
+            int imageSyntax = markdown.indexOf("!",openBracket);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
+            
+            boolean passes = false;
+
+            while (!passes) {
+                if ((imageSyntax != -1) && imageSyntax == openBracket+1){
+                    currentIndex = imageSyntax+1;
+                } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
+                    currentIndex = closeQuotes+1;
+                } else {
+                    passes = true;
+                }
+                if (!passes) {
+                    closeBracket = markdown.indexOf("]", currentIndex);
+                    openParen = markdown.indexOf("(", closeBracket);
+                    closeParen = markdown.indexOf(")", openParen);
+                }
+            }
+
             toReturn.add(markdown.substring(openParen + 1, closeParen));
             currentIndex = closeParen + 1;
         }
