@@ -23,9 +23,11 @@ public class MarkdownParse {
             boolean passes = false;
 
             while (!passes) {
-                if ((imageSyntax != -1) && imageSyntax == openBracket+1){
-                    currentIndex = imageSyntax+1;
+                if ((imageSyntax != -1) && imageSyntax == openBracket+1){ // skips if is image
+                    currentIndex = closeBracket+1;
+                    openBracket = markdown.indexOf("[", currentIndex);
                 } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
+                    // skips if enclosed by quotes
                     currentIndex = closeQuotes+1;
                 } else {
                     passes = true;
