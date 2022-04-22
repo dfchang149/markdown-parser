@@ -10,4 +10,12 @@ public class MarkdownParseTest {
     public void addition() {
         assertEquals(2, 1 + 1);
     }
+
+    @Test
+    public void getLinksForTestFile() throws IOException{
+        Path fileName = Path.of("C:/Users/chang/OneDrive/Documents/GitHub/markdown-parser/test-file.md");
+        String content = Files.readString(fileName);
+        ArrayList<String> links = new MarkdownParse().getLinks(content);
+	    assertEquals(List.of("https://something.com","some-thing.html"),links); 
+    }
 }
