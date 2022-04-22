@@ -19,28 +19,35 @@ public class MarkdownParse {
             int imageSyntax = markdown.indexOf("!",openBracket-1);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
-            
-            boolean passes = false;
 
-            while (!passes) {
-                if ((imageSyntax != -1) && imageSyntax == openBracket-1){ // skips if is image
-                    currentIndex = closeBracket+1;
-                    openBracket = markdown.indexOf("[", currentIndex);
-                } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
-                    // skips if enclosed by quotes
-                    currentIndex = closeQuotes+1;
-                } else {
-                    passes = true;
-                }
-                if (!passes) {
-                    closeBracket = markdown.indexOf("]", currentIndex);
+            while (openQuotes != -1 && closeQuotes != -1) { // skips brakets enclosed in quotes ""
+                if ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen)) {
+                    closeBracket = markdown.indexOf("]", closeBracket+1);
                     openParen = markdown.indexOf("(", closeBracket);
                     closeParen = markdown.indexOf(")", openParen);
+                } else {
+                    break;
                 }
             }
-
-            toReturn.add(markdown.substring(openParen + 1, closeParen));
-            currentIndex = closeParen + 1;
+            
+            if(openBracket == -1 || closeBracket == -1 || openParen == -1) {
+                currentIndex = markdown.length();
+                break;
+            } else if ((imageSyntax != -1) && imageSyntax == openBracket-1){ // skips if is image
+                currentIndex = openBracket+1;
+            } else if (openParen != closeBracket+1) { // skips if parenthesis not right after close bracket
+                currentIndex = closeBracket+1;
+            } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
+                // skips if enclosed by quotes
+                currentIndex = closeQuotes+1;
+            } else {
+                if (openParen != -1 && closeParen != -1) {
+                    toReturn.add(markdown.substring(openParen + 1, closeParen));
+                    currentIndex = closeParen + 1;
+                } else {
+                    break;
+                }
+            }
         }
 
         return toReturn;
