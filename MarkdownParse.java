@@ -16,14 +16,14 @@ public class MarkdownParse {
             int closeQuotes = markdown.indexOf('"',openQuotes+1);
             int openBracket = markdown.indexOf("[", currentIndex);
             int closeBracket = markdown.indexOf("]", openBracket);
-            int imageSyntax = markdown.indexOf("!",openBracket);
+            int imageSyntax = markdown.indexOf("!",openBracket-1);
             int openParen = markdown.indexOf("(", closeBracket);
             int closeParen = markdown.indexOf(")", openParen);
             
             boolean passes = false;
 
             while (!passes) {
-                if ((imageSyntax != -1) && imageSyntax == openBracket+1){ // skips if is image
+                if ((imageSyntax != -1) && imageSyntax == openBracket-1){ // skips if is image
                     currentIndex = closeBracket+1;
                     openBracket = markdown.indexOf("[", currentIndex);
                 } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
