@@ -35,6 +35,8 @@ public class MarkdownParse {
                 break;
             } else if ((imageSyntax != -1) && imageSyntax == openBracket-1){ // skips if is image
                 currentIndex = openBracket+1;
+            } else if (openParen != closeBracket+1) { // skips if parenthesis not right after close bracket
+                currentIndex = closeBracket+1;
             } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
                 // skips if enclosed by quotes
                 currentIndex = closeQuotes+1;
@@ -47,7 +49,7 @@ public class MarkdownParse {
                 }
             }
         }
-
+        
         return toReturn;
     }
 
