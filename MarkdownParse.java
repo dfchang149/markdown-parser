@@ -30,7 +30,7 @@ public class MarkdownParse {
                 }
             }
             
-            if(openBracket == -1 || closeBracket == -1 || openParen == -1) { // avoid infinite
+            if(openBracket == -1 || closeBracket == -1 || openParen == -1) { // avoid infinite loops
                 currentIndex = markdown.length();
                 break;
             } else if ((imageSyntax != -1) && imageSyntax == openBracket-1){ // skips if is image
