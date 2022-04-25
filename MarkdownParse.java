@@ -30,7 +30,10 @@ public class MarkdownParse {
                 }
             }
             
-            if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
+            if(openBracket == -1 || closeBracket == -1 || openParen == -1) { // avoid infinite loops
+                currentIndex = markdown.length();
+                break;
+            } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
                 // skips if enclosed by quotes
                 currentIndex = closeQuotes+1;
             }
