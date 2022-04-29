@@ -37,6 +37,8 @@ public class MarkdownParse {
                 currentIndex = openBracket+1;
             } else if (openParen != closeBracket+1) { // skips if parenthesis not right after close bracket
                 currentIndex = closeBracket+1;
+            } else if (closeParen == openParen+1) { // skips if there's nothing inside parenthesis ()
+                currentIndex = closeBracket+1;
             } else if ((openQuotes != -1 && closeQuotes != -1) && ((openQuotes < openBracket && closeQuotes > closeBracket) || (openQuotes < openParen && closeQuotes > closeParen))) {
                 // skips if enclosed by quotes
                 currentIndex = closeQuotes+1;
