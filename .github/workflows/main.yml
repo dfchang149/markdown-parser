@@ -1,5 +1,7 @@
 name: JUnit-Testing
 on: [push]
+  push:
+    branches: [ main ]
 jobs:
   JUnit-Tests:
     runs-on: ubuntu-latest
