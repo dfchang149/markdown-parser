@@ -2,7 +2,7 @@ name: JUnit-Testing
 on: [push]
 jobs:
   test-file-cases:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: create class and run tests
