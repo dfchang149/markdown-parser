@@ -5,7 +5,7 @@ import java.util.*;
 import java.nio.file.Path;
 import java.io.IOException;
 
-public class MarkdownParseTest2 {
+public class MarkdownParseTest {
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
@@ -49,25 +49,25 @@ public class MarkdownParseTest2 {
     @Test
     public void getLinksForTestFile4() throws IOException{
         System.out.println("Running test 5");
-        Path fileName = Path.of("C:/Users/chang/OneDrive/Documents/GitHub/markdown-parser/test-file4.md");
+        Path fileName = Path.of("test-file4.md");
         String content = Files.readString(fileName);
-        ArrayList<String> links = new MarkdownParse2().getLinks(content);
+        ArrayList<String> links = new MarkdownParse().getLinks(content);
 	    assertEquals(List.of(),links); 
     }
     @Test
     public void getLinksForTestFile5() throws IOException{
         System.out.println("Running test 6");
-        Path fileName = Path.of("C:/Users/chang/OneDrive/Documents/GitHub/markdown-parser/test-file5.md");
+        Path fileName = Path.of("test-file5.md");
         String content = Files.readString(fileName);
-        ArrayList<String> links = new MarkdownParse2().getLinks(content);
+        ArrayList<String> links = new MarkdownParse().getLinks(content);
 	    assertEquals(List.of(),links); 
     }
     @Test
     public void getLinksForTestFile6() throws IOException{
         System.out.println("Running test 7");
-        Path fileName = Path.of("C:/Users/chang/OneDrive/Documents/GitHub/markdown-parser/test-file6.md");
+        Path fileName = Path.of("test-file6.md");
         String content = Files.readString(fileName);
-        ArrayList<String> links = new MarkdownParse2().getLinks(content);
+        ArrayList<String> links = new MarkdownParse().getLinks(content);
 	    assertEquals(List.of(),links); 
     }
     @Test
