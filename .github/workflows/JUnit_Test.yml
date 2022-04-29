@@ -1,6 +1,5 @@
 name: JUnit-Testing
 on: [push]
-workflow_dispatch:
 jobs:
   test-file-cases:
     runs-on: windows-latest
