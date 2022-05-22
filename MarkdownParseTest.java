@@ -6,6 +6,13 @@ import java.nio.file.Path;
 import java.io.IOException;
 
 public class MarkdownParseTest {
+
+    /*  To Run the tests:
+        
+        javac -cp ".;lib\junit-4.13.2.jar;lib\hamcrest-core-1.3.jar" MarkdownParseTest.java
+        java -cp ".;lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore MarkdownParseTest
+    */
+
     @Test
     public void addition() {
         assertEquals(2, 1 + 1);
