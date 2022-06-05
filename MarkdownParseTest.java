@@ -113,4 +113,18 @@ public class MarkdownParseTest {
 	    assertEquals(List.of("https://www.twitter.com","https://sites.google.com/eng.ucsd.edu/cse-15l-spring-2022/schedule",
         "https://cse.ucsd.edu/"),links); 
     }
+
+    @Test
+    public void testFile566() throws IOException {
+        String contents = Files.readString(Path.of("test-files/566.md"));
+        List<String> expect = List.of("");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
+
+    @Test
+    public void testFile567() throws IOException {
+        String contents = Files.readString(Path.of("test-files/567.md"));
+        List<String> expect = List.of("/url1");
+        assertEquals(expect, MarkdownParse.getLinks(contents));
+    }
 }
